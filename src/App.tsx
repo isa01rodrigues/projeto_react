@@ -1,16 +1,18 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
+import { AuthProvider } from "./contexts/AuthContext";
 import Home from "./pages/home/Home";
-import Cadastro from "./cadastro/Cadastro";
-import Login from "./login/Login";
+import Cadastro from "./pages/cadastro/Cadastro";
+import Login from "./pages/login/Login";
 
 function App() {
   return (
     <>
       {/* BrowserRouter é o componente responsável por habilitar // a navegação
       entre páginas na aplicação React.*/}
-      <BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
         <Navbar /> {/* Componente de navegação exibido em todas as páginas */}
        
         <div className="min-h-[80vh]">
@@ -25,6 +27,7 @@ function App() {
         {/* Rodapé exibido em todas as páginas */}
         <Footer />
       </BrowserRouter>
+      </AuthProvider>
     </>
   );
 }
