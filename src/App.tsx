@@ -5,6 +5,9 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Home from "./pages/home/Home";
 import Cadastro from "./pages/cadastro/Cadastro";
 import Login from "./pages/login/Login";
+import ListaTemas from "./components/tema/listatemas/ListaTemas";
+import FormTema from "./components/tema/formtema/FormTema";
+import DeletarTema from "./components/tema/deletartema/DeletarTema";
 
 function App() {
   return (
@@ -13,20 +16,23 @@ function App() {
       entre páginas na aplicação React.*/}
       <AuthProvider>
         <BrowserRouter>
-        <Navbar /> {/* Componente de navegação exibido em todas as páginas */}
-       
-        <div className="min-h-[80vh]">
-          {/* Routes agrupa todas as rotas da aplicação */}
-          <Routes>
-            {/* Quando a URL for "/", renderiza o componente Home */}
-            <Route path="/" element={<Login />}/>
-            <Route path="/home" element={<Home />}/>
-            <Route path="/Cadastro" element={<Cadastro />}/>
-          </Routes>
-        </div>
-        {/* Rodapé exibido em todas as páginas */}
-        <Footer />
-      </BrowserRouter>
+          <Navbar /> {/* Componente de navegação exibido em todas as páginas */}
+          <div className="min-h-[80vh]">
+            {/* Routes agrupa todas as rotas da aplicação */}
+            <Routes>
+              {/* Quando a URL for "/", renderiza o componente Home */}
+              <Route path="/" element={<Login />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/Cadastro" element={<Cadastro />} />
+              <Route path="/Cadastro" element={<ListaTemas />} />
+              <Route path="/cadastrartema" element={<FormTema />} />
+              <Route path="/editartema/:id" element={<FormTema />} />
+              <Route path="/deletartema/:id" element={<DeletarTema />} />
+            </Routes>
+          </div>
+          {/* Rodapé exibido em todas as páginas */}
+          <Footer />
+        </BrowserRouter>
       </AuthProvider>
     </>
   );

@@ -12,7 +12,7 @@ import { cadastrarUsuario } from "../../services/Service";
 import { useNavigate } from "react-router-dom";
 
 // Importa a interface que representa a estrutura dos dados do usuário.
-import type Usuario from "../../models/Usuario";
+import type Usuarios from "../../models/Usuario";
 
 // Importa um componente de carregamento (spinner) para indicar que
 // uma requisição está sendo processada.
@@ -32,7 +32,7 @@ function Cadastro() {
   const [confirmarSenha, setConfirmarSenha] = useState<string>("");
 
   // Estado que armazena todos os dados do usuário que serão enviados para a API.
-  const [usuario, setUsuario] = useState<Usuario>({
+  const [usuarios, setUsuarios] = useState<Usuarios>({
     id: 0,
     nome: "",
     usuario: "",
@@ -44,21 +44,21 @@ function Cadastro() {
   // verifica se ele foi cadastrado com sucesso.
   // Caso o ID seja diferente de zero, redireciona para a tela inicial.
   useEffect(() => {
-    if (usuario.id !== 0) {
+    if (usuarios.id !== 0) {
       retornar();
     }
-  }, [usuario.id]);
+  }, [usuarios.id]);
 
   // Função responsável por redirecionar o usuário para a página inicial.
   function retornar() {
     navigate("/");
   }
 
-  // Atualiza automaticamente o estado "usuario"
+  // Atualiza automaticamente o estado "usuarios"
   // conforme o usuário digita nos campos do formulário.
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
-    setUsuario({
-      ...usuario,
+    setUsuarios({
+      ...usuarios,
       [e.target.name]: e.target.value,
     });
   }
@@ -69,20 +69,20 @@ function Cadastro() {
   }
 
   // Função responsável pelo envio do formulário de cadastro.
-  async function cadastrarNovoUsuario(e: FormEvent<HTMLFormElement>) {
+  async function cadastrarNovoUsuarios(e: FormEvent<HTMLFormElement>) {
     // Impede o comportamento padrão do formulário,
     // que seria recarregar a página.
     e.preventDefault();
 
     // Verifica se as senhas são iguais
     // e se possuem pelo menos 8 caracteres.
-    if (confirmarSenha === usuario.senha && usuario.senha.length >= 8) {
+    if (confirmarSenha === usuarios.senha && usuarios.senha.length >= 8) {
       // Ativa o carregamento.
       setIsLoading(true);
 
       try {
         // Envia os dados do usuário para a API.
-        await cadastrarUsuario(`/usuario/cadastrar`, usuario, setUsuario);
+        await cadastrarUsuario(`/usuarios/cadastrar`, usuarios, setUsuarios);
 
         // Exibe mensagem de sucesso.
         alert("Usuário cadastrado com sucesso!");
@@ -99,8 +99,8 @@ function Cadastro() {
       );
 
       // Limpa apenas o campo da senha.
-      setUsuario({
-        ...usuario,
+      setUsuarios({
+        ...usuarios,
         senha: "",
       });
 
@@ -126,7 +126,7 @@ function Cadastro() {
         {/* Formulário de cadastro */}
         <form
           className="flex justify-center items-center flex-col w-2/3 gap-3"
-          onSubmit={cadastrarNovoUsuario}
+          onSubmit={cadastrarNovoUsuarios}
         >
           <h2 className="text-slate-900 text-5xl">Cadastrar</h2>
 
@@ -138,7 +138,7 @@ function Cadastro() {
               type="text"
               id="nome"
               name="nome"
-              value={usuario.nome}
+              value={usuarios.nome}
               onChange={(e) => atualizarEstado(e)}
               placeholder="Nome"
               className="border-2 border-slate-700 rounded p-2"
@@ -147,13 +147,13 @@ function Cadastro() {
 
           {/* Campo Usuário */}
           <div className="flex flex-col w-full">
-            <label htmlFor="usuario">Usuário</label>
+            <label htmlFor="usuarios">Usuário</label>
 
             <input
               type="text"
               id="usuario"
               name="usuario"
-              value={usuario.usuario}
+              value={usuarios.usuario}
               onChange={(e) => atualizarEstado(e)}
               placeholder="Usuário"
               className="border-2 border-slate-700 rounded p-2"
@@ -168,7 +168,7 @@ function Cadastro() {
               type="text"
               id="foto"
               name="foto"
-              value={usuario.foto}
+              value={usuarios.foto}
               onChange={(e) => atualizarEstado(e)}
               placeholder="Foto"
               className="border-2 border-slate-700 rounded p-2"
@@ -183,7 +183,7 @@ function Cadastro() {
               type="password"
               id="senha"
               name="senha"
-              value={usuario.senha}
+              value={usuarios.senha}
               onChange={(e) => atualizarEstado(e)}
               placeholder="Senha"
               className="border-2 border-slate-700 rounded p-2"

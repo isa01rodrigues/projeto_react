@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../../contexts/AuthContext"
 
 function Navbar() {
 
@@ -24,7 +24,12 @@ function Navbar() {
             Blog Pessoal
           </Link>
           <div className="flex gap-4">
-            Postagens Temas Cadastrar Tema Perfil Sair
+            Postagens
+             <Link to='/temas' className='hover:underline'>Temas</Link>
+             <Link to='/cadastrartema' className='hover:underline'>Cadastrar tema</Link>
+
+                Perfil 
+                
             <Link to='' onClick={logout} className='hover:underline'>Sair</Link>
           </div>
         </div>
