@@ -6,7 +6,7 @@ import axios from "axios";
 // A propriedade baseURL define o endereço base da API.
 // Todas as requisições utilizarão essa URL como referência.
 const api = axios.create({
-  baseURL: "https://blogpessoal-api-java84.onrender.com/",
+  baseURL: "https://blogpessoal-api-java84.onrender.com",
 });
 
 // Função assíncrona responsável por cadastrar um novo usuário.

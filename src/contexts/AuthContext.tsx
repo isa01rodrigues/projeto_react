@@ -10,6 +10,8 @@ import type UsuarioLogin from "../models/UsuarioLogin";
 // Importa a função responsável por realizar a requisição de login na API.
 import { login } from "../services/Service";
 
+import { ToastAlerta } from "../utils/ToastAlerta";
+
 // Interface que define quais dados e funções estarão disponíveis
 // para todos os componentes que utilizarem o AuthContext.
 interface AuthContextProps {
@@ -66,15 +68,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
       await login(`/usuarios/logar`, usuarioLogin, setUsuario);
 
       // Exibe mensagem de sucesso.
-      alert("O Usuário foi autenticado com sucesso!");
+     ToastAlerta("Usuário foi autenticado com sucesso!", "sucesso")
     } catch (error) {
       // Caso ocorra algum erro na autenticação,
       // exibe uma mensagem ao usuário.
-      alert("Os Dados do usuário estão inconsistentes!");
+      ToastAlerta("Os dados do Usuário estão inconsistentes!", "erro")
     }
 
     // Finaliza o carregamento.
     setIsLoading(false);
+
+
   }
 
   // Função responsável por realizar o logout.
